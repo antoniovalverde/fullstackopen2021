@@ -8,11 +8,19 @@ const Header = (props) => {
 }
 
 const Statistics = (props) => {
+
+  let total = props.bueno + props.neutro + props.malo
+  if(total === 0){
+    return (
+      <p><strong>NO FEEDBACK GIVEN</strong></p>
+    )
+  }
+
   return (
     <div>
-      <p>ALL {props.bueno + props.neutro + props.malo}</p>
-      <p>AVERAGE {(props.bueno - props.malo)/(props.bueno + props.neutro + props.malo)}</p>
-      <p>POSITIVE {(props.bueno/(props.bueno + props.neutro + props.malo)) * 100} %</p>
+      <p>ALL {total}</p>
+      <p>AVERAGE {(props.bueno - props.malo)/(total)}</p>
+      <p>POSITIVE {(props.bueno/(total)) * 100} %</p>
     </div>
   )
 }
