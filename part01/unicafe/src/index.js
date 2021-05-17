@@ -7,6 +7,16 @@ const Header = (props) => {
   )
 }
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <p>ALL {props.bueno + props.neutro + props.malo}</p>
+      <p>AVERAGE {(props.bueno - props.malo)/(props.bueno + props.neutro + props.malo)}</p>
+      <p>POSITIVE {(props.bueno/(props.bueno + props.neutro + props.malo)) * 100} %</p>
+    </div>
+  )
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -24,9 +34,7 @@ const App = () => {
       <p>GOOD {good}</p>
       <p>NEUTRAL {neutral}</p>
       <p>BAD {bad}</p>
-      <p>ALL {good + neutral + bad}</p>
-      <p>AVERAGE {(good - bad)/(good + neutral + bad)}</p>
-      <p>POSITIVE {(good/(good + neutral + bad)) * 100} %</p>
+      <Statistics bueno={good} neutro={neutral} malo={bad} />
     </div>
   )
 }
