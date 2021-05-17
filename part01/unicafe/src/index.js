@@ -10,18 +10,57 @@ const Header = (props) => {
 const Statistics = (props) => {
 
   let total = props.bueno + props.neutro + props.malo
-  if(total === 0){
+
+  if(total === 0 && props.marca === true){
     return (
       <p><strong>NO FEEDBACK GIVEN</strong></p>
     )
   }
 
-  return (
-    <div>
+  if(total === 0){
+    return (
+      <p></p>
+    )
+  }
+
+  if(props.tipo === 'infoB'){
+    return (
+      <p>GOOD {props.bueno}</p>
+    )
+  }
+
+  if(props.tipo === 'infoN'){
+    return (
+      <p>NEUTRAL {props.neutro}</p>
+    )
+  }
+
+  if(props.tipo === 'infoM'){
+    return (
+      <p>BAD {props.malo}</p>
+    )
+  }
+
+  if(props.tipo === 'all'){
+    return (
       <p>ALL {total}</p>
+    )
+  }
+
+  if(props.tipo === 'average'){
+    return (
       <p>AVERAGE {(props.bueno - props.malo)/(total)}</p>
-      <p>POSITIVE {(props.bueno/(total)) * 100} %</p>
-    </div>
+    )
+  }
+
+  return (
+        <p>POSITIVE {(props.bueno/(total)) * 100} %</p>
+  )
+}
+
+const Boton = (props) => {
+  return (
+    <button onClick={props.handleClick}>{props.texto}</button>
   )
 }
 
@@ -31,18 +70,32 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const handleBuenoClick = () => {
+    setGood(good + 1)
+  }
+
+  const handleNeutroClick = () => {
+    setNeutral(neutral + 1)
+  }
+
+  const handleMaloClick = () => {
+    setBad(bad + 1)
+  }
+
   return (
     <div>
       <Header title="GIVE ME YOUR FEEDBACK" />
-      <button onClick={() => setGood(good + 1)}>GOOD</button>
-      <button onClick={() => setNeutral(neutral + 1)}>NEUTRAL</button>
-      <button onClick={() => setBad(bad + 1)}>BAD</button>
+      <Boton handleClick={handleBuenoClick} texto="GOOD" />
+      <Boton handleClick={handleNeutroClick} texto="NEUTRAL" />
+      <Boton handleClick={handleMaloClick} texto="BAD" />
       <h1>STATISTICS</h1>
       <br />
-      <p>GOOD {good}</p>
-      <p>NEUTRAL {neutral}</p>
-      <p>BAD {bad}</p>
-      <Statistics bueno={good} neutro={neutral} malo={bad} />
+      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoB" marca={true} />
+      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoN" />
+      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoM" />
+      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="all" />
+      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="average" />
+      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="positive" />
     </div>
   )
 }
