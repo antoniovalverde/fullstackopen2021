@@ -13,48 +13,48 @@ const Statistics = (props) => {
 
   if(total === 0 && props.marca === true){
     return (
-      <p><strong>NO FEEDBACK GIVEN</strong></p>
+      <tr><td><strong>NO FEEDBACK GIVEN</strong></td></tr>
     )
   }
 
   if(total === 0){
     return (
-      <p></p>
+      <tr><td></td></tr>
     )
   }
 
   if(props.tipo === 'infoB'){
     return (
-      <p>GOOD {props.bueno}</p>
+      <tr><td>GOOD </td><td>{props.bueno}</td></tr>
     )
   }
 
   if(props.tipo === 'infoN'){
     return (
-      <p>NEUTRAL {props.neutro}</p>
+      <tr><td>NEUTRAL </td><td>{props.neutro}</td></tr>
     )
   }
 
   if(props.tipo === 'infoM'){
     return (
-      <p>BAD {props.malo}</p>
+      <tr><td>BAD </td><td>{props.malo}</td></tr>
     )
   }
 
   if(props.tipo === 'all'){
     return (
-      <p>ALL {total}</p>
+      <tr><td>ALL </td><td>{total}</td></tr>
     )
   }
 
   if(props.tipo === 'average'){
     return (
-      <p>AVERAGE {(props.bueno - props.malo)/(total)}</p>
+      <tr><td>AVERAGE </td><td>{(props.bueno - props.malo)/(total)}</td></tr>
     )
   }
 
   return (
-        <p>POSITIVE {(props.bueno/(total)) * 100} %</p>
+    <tr><td>POSITIVE </td><td>{(props.bueno/(total)) * 100} %</td></tr>
   )
 }
 
@@ -90,12 +90,16 @@ const App = () => {
       <Boton handleClick={handleMaloClick} texto="BAD" />
       <h1>STATISTICS</h1>
       <br />
-      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoB" marca={true} />
-      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoN" />
-      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoM" />
-      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="all" />
-      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="average" />
-      <Statistics bueno={good} neutro={neutral} malo={bad} tipo="positive" />
+      <table>
+        <tbody>
+          <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoB" marca={true} />
+          <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoN" />
+          <Statistics bueno={good} neutro={neutral} malo={bad} tipo="infoM" />
+          <Statistics bueno={good} neutro={neutral} malo={bad} tipo="all" />
+          <Statistics bueno={good} neutro={neutral} malo={bad} tipo="average" />
+          <Statistics bueno={good} neutro={neutral} malo={bad} tipo="positive" />
+        </tbody>
+      </table>
     </div>
   )
 }
