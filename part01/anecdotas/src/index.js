@@ -22,12 +22,29 @@ const App = (props) => {
     setPuntos(copy)
   };
 
+  const MasVotada = () => {
+    let indiceMas = 0
+    let max = 0
+    puntos.forEach((item, indice) => {
+      if (item > max) {
+        max = item;
+        indiceMas = indice
+      }
+    })
+    return indiceMas
+  }
+
   return (
     <div>
-      <h3>{props.anecdotes[selected]}</h3>
+      <h3> {props.anecdotes[selected]} </h3>
       <p>has {puntos[selected]} votos</p>
       <Boton handleClick={handleClickNext} texto="NEXT ANECDOTA" />
       <Boton handleClick={handleClickVote} texto="VOTAR" />
+      <br />
+      <br />
+      <h2>Anecdote with most votes</h2>
+      <h3> {anecdotes[MasVotada()]} </h3>
+      <p>has {puntos[MasVotada()]} votos</p>
     </div>
   )
 }
