@@ -9,16 +9,25 @@ const Boton = (props) => {
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const [puntos, setPuntos] = useState(new Array(6).fill(0))
 
   const handleClickNext = () => {
     let num = Math.floor(Math.random() * anecdotes.length);
     setSelected(num);
   };
 
+  const handleClickVote = () => {
+    const copy = [...puntos]
+    copy[selected] += 1
+    setPuntos(copy)
+  };
+
   return (
     <div>
       <h3>{props.anecdotes[selected]}</h3>
+      <p>has {puntos[selected]} votos</p>
       <Boton handleClick={handleClickNext} texto="NEXT ANECDOTA" />
+      <Boton handleClick={handleClickVote} texto="VOTAR" />
     </div>
   )
 }
