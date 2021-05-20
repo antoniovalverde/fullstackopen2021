@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Header = props =>
-  <h1>{props.course.name}</h1>
+  <h3>{props.course.name}</h3>
 
 const Part = props =>
   <p>{props.name} {props.exercises}</p>
