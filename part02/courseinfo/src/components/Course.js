@@ -16,16 +16,13 @@ const Content = (props) => {
 
 const Total = (props) => {
 
-  let partes = props.course.parts
-  let suma = 0
-
-  for (let i=0;i<partes.length;i++){
-    suma += partes[i].exercises
-  }
+  const total = props.course.parts.reduce((s, parte) => {
+    return s + parte.exercises
+  }, 0)
 
   return (
       <div>
-          <p><strong>TOTAL OF {suma} EXERCISES</strong></p> 
+          <p><strong>TOTAL OF {total} EXERCISES</strong></p> 
       </div>
   )
 }
