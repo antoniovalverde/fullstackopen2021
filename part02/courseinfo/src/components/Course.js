@@ -14,11 +14,28 @@ const Content = (props) => {
     )
 }
 
+const Total = (props) => {
+
+  let partes = props.course.parts
+  let suma = 0
+
+  for (let i=0;i<partes.length;i++){
+    suma += partes[i].exercises
+  }
+
+  return (
+      <div>
+          <p><strong>TOTAL OF {suma} EXERCISES</strong></p> 
+      </div>
+  )
+}
+
 const Course = (props) => {  
     return (
         <div>
             <Header course={props.course} />
             <Content course={props.course} />
+            <Total course={props.course} />
         </div>
   )
 }
