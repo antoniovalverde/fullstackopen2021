@@ -1,19 +1,7 @@
 import React, { useState } from 'react'
-
-const Personas = (props) => {
-
-  const filtrados = props.listado.filter(
-    persona => persona.name.toLowerCase().includes(props.filtro.toLowerCase())
-  )
-
-  return (
-    <div>
-      <ul>
-        {filtrados.map(tema => <li key={tema.name}>{tema.name}</li>)}  
-      </ul>
-    </div>
-  )
-}
+import Filtro from './components/Filtro'
+import Personas from './components/Personas'
+import Formulario from './components/Formulario'
 
 const App = () => {
     const [persons, setPersons] = useState([
@@ -62,20 +50,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-          Filter Persons: <input onChange={handleFiltrarPersonas}/>
-      </div>
+      <Filtro onChange={handleFiltrarPersonas} />
       <br />
-      <form onSubmit={addPersona}>
-        <div>
-          name: <input value={newName} onChange={handleCambioNombre}/>
-          <br />
-          number: <input value={newNumero} onChange={handleCambioNumero}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Formulario onS={addPersona} onCnombre={handleCambioNombre} onCnumero={handleCambioNumero} valueNombre={newName} valueNumero={newNumero}/>
       <h2>Numbers</h2>
       <Personas listado={persons} filtro={newFiltro}/>
     </div>
