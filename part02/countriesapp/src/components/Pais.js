@@ -5,7 +5,7 @@ import React from 'react'
 const Pais = (props) => {
 
     return (
-        <li>{props.country}</li>
+        <li>{props.country} <button value={props.country} onClick={props.boton}>SHOW</button></li>
     )
 }
 

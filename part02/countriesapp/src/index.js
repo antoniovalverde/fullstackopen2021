@@ -24,7 +24,7 @@ const App = () => {
       <h2>COUNTRIES APP</h2>
       <Filtro onChange={handleFiltrarPaises} />
       <br />
-      <Paises listado={paises} filtro={newFiltro}/>
+      <Paises listado={paises} filtro={newFiltro} boton={handleFiltrarPaises}/>
     </div>
   )
 }

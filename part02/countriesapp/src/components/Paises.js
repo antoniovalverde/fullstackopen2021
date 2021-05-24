@@ -20,7 +20,7 @@ const Paises = (props) => {
             return (
                 <div>
                     <ul>
-                        {filtrados.map(country => <Pais key={country.name} country={country.name}/>)}  
+                        {filtrados.map(country => <Pais key={country.name} country={country.name} boton={props.boton} />)}  
                     </ul>
                 </div>
             )            
