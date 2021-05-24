@@ -52,16 +52,24 @@ const App = () => {
           setNewName('')
           setNewNumero('')
         })
-        /*axios.post('http://localhost:3001/persons', nombreObjeto).then(respuesta => {
-          setPersons(persons.concat(respuesta.data))
-          setNewName('')
-          setNewNumero('')
-        })*/
 
       }else{
         alert(`${newName} is already added to phonebook`)
       }
    }
+
+  const borrarPersona = (persona) => {
+    const resultado = window.confirm(`Delete ${persona.name}?`)
+    if (resultado){
+      personaService
+        .borrar(persona.id)
+        .then((respuesta) => {
+          setPersons(persons.filter((p) => p.id !== persona.id))
+           setNewName('')
+          setNewNumero('')
+        })  
+    }
+  }
 
   return (
     <div>
@@ -70,7 +78,7 @@ const App = () => {
       <br />
       <Formulario onS={addPersona} onCnombre={handleCambioNombre} onCnumero={handleCambioNumero} valueNombre={newName} valueNumero={newNumero}/>
       <h2>Numbers</h2>
-      <Personas listado={persons} filtro={newFiltro}/>
+      <Personas listado={persons} filtro={newFiltro} aborrar={borrarPersona}/>
     </div>
   )
 }

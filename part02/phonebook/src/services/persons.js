@@ -13,6 +13,10 @@ const update = (id, newObject) => {
   return axios.put(`${baseUrl}/${id}`, newObject)
 }
 
-const ps = {getAll, create, update}
+const borrar = id => {
+    return axios.delete(`${baseUrl}/${id}`)
+  }
+
+const ps = {getAll, create, update, borrar}
 
 export default ps

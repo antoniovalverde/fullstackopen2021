@@ -2,10 +2,10 @@
 
 import React from 'react'
 
-const Persona = (props) => {
+const Persona = ({nom, num, persona, borrando}) => {
 
     return (
-        <li>{props.nom} {props.num}</li>
+        <li>{nom} {num} <button onClick={() => borrando(persona)}>DELETE</button></li>
     )
 }
 

@@ -3,16 +3,16 @@
 import React from 'react'
 import Persona from './Persona'
 
-const Personas = (props) => {
+const Personas = ({listado, filtro, aborrar}) => {
 
-    const filtrados = props.listado.filter(
-      persona => persona.name.toLowerCase().includes(props.filtro.toLowerCase())
+    const filtrados = listado.filter(
+      persona => persona.name.toLowerCase().includes(filtro.toLowerCase())
     )
   
     return (
       <div>
         <ul>
-          {filtrados.map(tema => <Persona key={tema.name} nom={tema.name} num={tema.number}/>)}  
+          {filtrados.map(tema => <Persona key={tema.name} nom={tema.name} num={tema.number} persona={tema} borrando={aborrar}/>)}  
         </ul>
       </div>
     )
