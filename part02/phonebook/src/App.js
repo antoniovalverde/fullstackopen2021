@@ -39,11 +39,13 @@ const App = () => {
       const foundNombre = persons.find(element => element.name === newName);
 
       console.log(foundNombre)
+
+      const nombreObjeto = {
+        name: newName,
+        number: newNumero
+      }
+
       if(foundNombre === undefined){
-        const nombreObjeto = {
-          name: newName,
-          number: newNumero
-        }
 
         personaService
         .create(nombreObjeto)
@@ -54,7 +56,19 @@ const App = () => {
         })
 
       }else{
-        alert(`${newName} is already added to phonebook`)
+        const result = window.confirm(`${foundNombre.name} is already added to phonebook, replace the old number with a new one?`)
+        if(result){
+          personaService
+          .update(foundNombre.id, nombreObjeto)
+          .then(respuesta => {
+            const cambioPersona = persons.map(p =>
+              p.id !== foundNombre.id ? p : respuesta.data
+            )
+             setPersons(cambioPersona)
+             setNewName('')
+             setNewNumero('')
+          })            
+        }
       }
    }
 
