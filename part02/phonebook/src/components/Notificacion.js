@@ -9,12 +9,18 @@ const Notificacion = (props) => {
                 <p>{props.message}</p>
             </div>
         )
-    }else{
+    }else if(props.valido === 'ok'){
         return (
             <div>
                 <p className='notiok'>{props.message}</p>
             </div>  
         )      
+    }else{
+        return (
+            <div>
+                <p className='notifail'>{props.message}</p>
+            </div>  
+        )          
     }
 }
 

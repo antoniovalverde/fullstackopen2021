@@ -14,6 +14,7 @@ const App = () => {
   const [newNumero, setNewNumero] = useState('')
   const [newFiltro, setNewFiltro] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [mensaje, setMensaje] = useState('')
 
   useEffect(() => {
     personaService
@@ -24,15 +25,15 @@ const App = () => {
   }, [])
 
   const handleCambioNombre = evento => {
-      setNewName(evento.target.value);
+      setNewName(evento.target.value)
   }
 
   const handleCambioNumero = evento => {
-    setNewNumero(evento.target.value);
+    setNewNumero(evento.target.value)
   }
 
   const handleFiltrarPersonas = evento => {
-    setNewFiltro(evento.target.value);
+    setNewFiltro(evento.target.value)
 
 
   }
@@ -40,7 +41,7 @@ const App = () => {
   const addPersona = (evento) => {
       evento.preventDefault()
 
-      const foundNombre = persons.find(element => element.name === newName);
+      const foundNombre = persons.find(element => element.name === newName)
 
       console.log(foundNombre)
 
@@ -57,11 +58,20 @@ const App = () => {
           setPersons(persons.concat(respuesta.data))
           setNewName('')
           setNewNumero('')
+          setMensaje('ok')
+          setErrorMessage(`ADDED ${nombreObjeto.name}`)
+          setTimeout(() => {
+            setErrorMessage('')
+          }, 2000)
         })
-        setErrorMessage(`ADDED ${nombreObjeto.name}`);
-        setTimeout(() => {
-          setErrorMessage('')
-        }, 2000);
+
+        .catch(error => {
+          setMensaje('fail')
+          setErrorMessage(`INFORMATION OF ${nombreObjeto.name}: ${error.response.data.error}`)
+          setTimeout(() => {
+            setErrorMessage('')
+          }, 5000)
+        })
 
       }else{
         const result = window.confirm(`${foundNombre.name} is already added to phonebook, replace the old number with a new one?`)
@@ -75,11 +85,19 @@ const App = () => {
              setPersons(cambioPersona)
              setNewName('')
              setNewNumero('')
+             setMensaje('ok')
+             setErrorMessage(`UPDATED ${nombreObjeto.name}`)
+             setTimeout(() => {
+               setErrorMessage('')
+             }, 2000)
           })   
-          setErrorMessage(`UPDATED ${nombreObjeto.name}`);
-          setTimeout(() => {
-            setErrorMessage('')
-          }, 2000);         
+          .catch(error => {
+            setMensaje('fail')
+            setErrorMessage(`INFORMATION OF ${nombreObjeto.name}: ${error.response.data.error}`)
+            setTimeout(() => {
+              setErrorMessage('')
+            }, 5000)
+          }) 
         }
       }
    }
@@ -93,14 +111,22 @@ const App = () => {
           setPersons(persons.filter((p) => p.id !== persona.id))
            setNewName('')
           setNewNumero('')
+          setMensaje('')
         })  
+        .catch(error => {
+          setMensaje('fail')
+          setErrorMessage(`INFORMATION OF ${persona.name}: ${error.response.data.error}`)
+          setTimeout(() => {
+            setErrorMessage('')
+          }, 5000) 
+        })
     }
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} valido={mensaje}/>
       <Filtro onChange={handleFiltrarPersonas} />
       <br />
       <Formulario onS={addPersona} onCnombre={handleCambioNombre} onCnumero={handleCambioNumero} valueNombre={newName} valueNumero={newNumero}/>
