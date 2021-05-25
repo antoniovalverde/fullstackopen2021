@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
-//import axios from 'axios'
 import Filtro from './components/Filtro'
 import Personas from './components/Personas'
 import Formulario from './components/Formulario'
+import Notification from './components/Notificacion'
 import personaService from './services/persons'
+
+//CSS
+import "./App.css"
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [newNumero, setNewNumero] = useState('')
   const [newFiltro, setNewFiltro] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     personaService
@@ -54,6 +58,10 @@ const App = () => {
           setNewName('')
           setNewNumero('')
         })
+        setErrorMessage(`ADDED ${nombreObjeto.name}`);
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 2000);
 
       }else{
         const result = window.confirm(`${foundNombre.name} is already added to phonebook, replace the old number with a new one?`)
@@ -67,7 +75,11 @@ const App = () => {
              setPersons(cambioPersona)
              setNewName('')
              setNewNumero('')
-          })            
+          })   
+          setErrorMessage(`UPDATED ${nombreObjeto.name}`);
+          setTimeout(() => {
+            setErrorMessage('')
+          }, 2000);         
         }
       }
    }
@@ -88,6 +100,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <Filtro onChange={handleFiltrarPersonas} />
       <br />
       <Formulario onS={addPersona} onCnombre={handleCambioNombre} onCnumero={handleCambioNumero} valueNombre={newName} valueNumero={newNumero}/>
