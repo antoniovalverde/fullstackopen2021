@@ -1,0 +1,10 @@
+//Ejercicio 4.1
+
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username": "Koky",
+    "name": "Antonio Valverde",
+    "password": "123456"
+}

@@ -1,0 +1,6 @@
+//Ejercicio 4.21
+
+DELETE http://localhost:3001/api/blogs/60ccae3c2d3d000598f5e311
+Content-Type: application/json
+//Change this for play and id in http request for more play
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iktva3kiLCJpZCI6IjYwY2M2NTUxZjk0YmRkMTU1ODJkMDUxZSIsImlhdCI6MTYyNDAyNzAwMH0.Y_jMQJstI6mYEjxYZANxvooMrl7Jq5oaLBt6bZ0pjU0

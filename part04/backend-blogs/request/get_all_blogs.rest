@@ -1,0 +1,4 @@
+//Ejercicio 4.1
+
+GET http://localhost:3001/api/blogs
+
